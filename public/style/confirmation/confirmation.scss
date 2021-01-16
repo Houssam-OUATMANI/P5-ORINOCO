@@ -1,0 +1,53 @@
+@import '../utils/mixins.scss';
+
+*{
+    font-family: "Big Shoulders Stencil Text" , "Roboto", sans-serif;
+}
+
+body {
+    @include template;
+}
+
+.main {
+    text-align: center;
+}
+
+.confirm {
+    color:  chartreuse;
+}
+
+
+.order__article{
+    margin: auto;
+    border-bottom: 3px solid chartreuse;
+    width: 40%;
+    h3 {
+        font-size: 1.5rem;
+    }
+    .id {
+        font-size: 1.3rem;
+    }
+    .price {
+        font-size: 1.3rem;
+        span {
+            color: chartreuse;
+        }
+    }
+}
+
+.footer {
+    margin-top: 6rem;
+   border-top: 5px solid chartreuse;
+   border-bottom: 5px solid chartreuse;  
+   height: 350px;
+   display: flex;
+   justify-content: center;
+
+   section {
+       display: flex;
+       align-items: center;
+       justify-content: center;
+       flex-direction: column;
+   }
+}
+

@@ -1,0 +1,54 @@
+* {
+  color: white;
+}
+
+button, option, select {
+  color: black !important;
+  font-size: 1.2rem;
+  cursor: pointer;
+  font-family: "Big Shoulders Stencil Text" !important;
+}
+
+/********/
+html, body {
+  scroll-behavior: smooth;
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+a {
+  text-decoration: none;
+  color: white;
+}
+
+ul {
+  list-style: none;
+}
+
+img {
+  object-fit: cover;
+  width: 480px;
+  height: 270px;
+}
+
+.main {
+  margin: 0 1rem;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: auto;
+  background-color: black;
+  border-bottom: 5px solid #747171;
+}
+.header h1 {
+  margin-left: 2rem;
+}
+.header nav {
+  margin-right: 2rem;
+}
+
+/*# sourceMappingURL=header.css.map */

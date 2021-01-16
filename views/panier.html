@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Shrikhand&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Stencil+Text:wght@100;300;400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Font-awesome CDN -->
+    <script src="https://kit.fontawesome.com/ef05bd29a1.js" crossorigin="anonymous" defer ></script>
+    <script src="../public/javascript/panier.js" defer></script>
+
+    <link rel="stylesheet" href="../public/style/template/header/header.css">
+    <link rel="stylesheet" href="../public/style/index/index.css" />
+    <link rel="stylesheet" href="../public/style/panier/panier.css">
+    <title>ORONOCA</title>
+  </head>
+  <body>
+    <header class="header">
+      <h1> <a href="../index.html"> LOGO E-COMMERCE</a></h1>
+      <nav>
+        <ul>
+          <li><a href="./panier.html">PANIER</a> <span class="counter">0</span></li>
+        </ul>
+      </nav>
+    </header>
+    <main class="main">
+      <div class="panier-item__holder"></div>
+      <div class="price__holder"></div>
+
+
+
+<div class="formulaire">
+  <form method="POST"id="form">
+   <div class="form-group">
+     <label for="name">PRENOM</label>
+     <input class="form-control" type="text" name="firstName" id="firstName" required>
+   </div>
+   <div class="form-group">
+     <label for="lastName">NOM DE FAMILLE</label>
+     <input class="form-control" type="text" name="lastName" id="lastName" required>
+   </div>
+   <div class="form-group">
+     <label for="adresse">ADRESSE DE LIVRAISON</label>
+     <input class="form-control" type="text" name="address" id="address" required>
+   </div>
+   <div class="form-group">
+     <label for="city">VILLE</label>
+     <input class="form-control" type="text" name="city" id="city" required>
+   </div>
+   <div class="form-group">
+     <label for="email">EMAIL</label>
+     <input class="form-control" type="email" name="email" id="email" required>
+   </div>
+   <button class="btn-submit" type="submit">Valider</button>
+  </form>
+</div>
+    </main>
+    <footer class="footer">
+      <section>
+        <h2>ORINOCO BOUTIQUE EN LIGNE</h2>
+        <p>Adresse : 50 rue du bidule Paris</p>
+        <p>Contact : <a title="orinoco@bidule.com" href="mailto:orinoco@bidule.com">orinoco@bidule.com</a></p>
+        <p> Copyright ORINOCO TOUS DROITS RESERVÉS &copy;</p>
+      </section>
+    </footer>
+  </body>
+</html>

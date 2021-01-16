@@ -1,0 +1,77 @@
+@import "../utils/mixins.scss";
+
+* {
+  @include fonts;
+  font-family: "Big Shoulders Stencil Text";
+}
+body {
+  @include template;
+}
+
+.all {
+  h2{text-align: center;}
+}
+.card__holder{
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+
+.card {
+  max-width: 500px ;
+  border: 5px solid chartreuse;
+  padding-bottom: 1rem;
+  margin: 2rem 0;
+}
+
+.card__info{
+  @include flexBox;
+  justify-content: space-between;
+  margin: 0 .5rem;
+}
+
+.panier-btn{
+  display: block;
+  margin: auto;
+}
+
+.counter {
+  color: chartreuse;
+  font-size: 1.3rem;
+  font-weight: 700;
+}
+
+.detail {
+  display: block;
+  text-align: center;
+  margin-top: .5rem;
+  text-decoration: underline chartreuse;
+  letter-spacing: .1rem;
+}
+
+.panier-btn {
+  background-color: chartreuse;
+  border: none;
+  padding: .5rem 1rem;
+  border-radius: 5px;
+}
+.disabled {
+  background-color: #a1a1a1a8;
+  cursor: none;
+}
+
+.footer {
+  margin-top: 6rem;
+ border-top: 5px solid chartreuse;
+ border-bottom: 5px solid chartreuse;  
+ height: 350px;
+ display: flex;
+ justify-content: center;
+
+ section {
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     flex-direction: column;
+ }
+}

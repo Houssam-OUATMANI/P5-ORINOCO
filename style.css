@@ -1,0 +1,479 @@
+* {
+  font-family: "Big Shoulders Stencil Text";
+}
+
+body {
+  background-color: #292424;
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+main {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 90vh;
+  flex-direction: column;
+}
+
+.title-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.title {
+  font-size: 9.5rem;
+  letter-spacing: 1.5rem;
+  color: white;
+}
+
+.button-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+a {
+  font-size: 3.5rem;
+  letter-spacing: 0.6rem;
+  text-decoration: none;
+  color: chartreuse;
+}
+
+.orinoco span {
+  animation: 2s orinoco ease;
+  display: inline-block;
+  color: chartreuse;
+  transition: 2s;
+}
+.orinoco span:hover {
+  transform: rotate(180deg);
+  font-style: italic;
+}
+
+.e-shop {
+  margin-top: 2rem;
+  display: block;
+  font-size: 6rem;
+  text-align: center;
+}
+.e-shop .s {
+  animation: 2s orinoco ease;
+  display: inline-block;
+  color: chartreuse;
+  transition: 2s;
+}
+.e-shop .s:hover {
+  transform: rotate(180deg);
+  font-style: italic;
+}
+
+@keyframes orinoco {
+  1% {
+    transform: translateX(-495%);
+    letter-spacing: 743px;
+  }
+  2% {
+    transform: translateX(-490%);
+    letter-spacing: 736px;
+  }
+  3% {
+    transform: translateX(-485%);
+    letter-spacing: 729px;
+  }
+  4% {
+    transform: translateX(-480%);
+    letter-spacing: 722px;
+  }
+  5% {
+    transform: translateX(-475%);
+    letter-spacing: 715px;
+  }
+  6% {
+    transform: translateX(-470%);
+    letter-spacing: 708px;
+  }
+  7% {
+    transform: translateX(-465%);
+    letter-spacing: 701px;
+  }
+  8% {
+    transform: translateX(-460%);
+    letter-spacing: 694px;
+  }
+  9% {
+    transform: translateX(-455%);
+    letter-spacing: 687px;
+  }
+  10% {
+    transform: translateX(-450%);
+    letter-spacing: 680px;
+  }
+  11% {
+    transform: translateX(-445%);
+    letter-spacing: 673px;
+  }
+  12% {
+    transform: translateX(-440%);
+    letter-spacing: 666px;
+  }
+  13% {
+    transform: translateX(-435%);
+    letter-spacing: 659px;
+  }
+  14% {
+    transform: translateX(-430%);
+    letter-spacing: 652px;
+  }
+  15% {
+    transform: translateX(-425%);
+    letter-spacing: 645px;
+  }
+  16% {
+    transform: translateX(-420%);
+    letter-spacing: 638px;
+  }
+  17% {
+    transform: translateX(-415%);
+    letter-spacing: 631px;
+  }
+  18% {
+    transform: translateX(-410%);
+    letter-spacing: 624px;
+  }
+  19% {
+    transform: translateX(-405%);
+    letter-spacing: 617px;
+  }
+  20% {
+    transform: translateX(-400%);
+    letter-spacing: 610px;
+  }
+  21% {
+    transform: translateX(-395%);
+    letter-spacing: 603px;
+  }
+  22% {
+    transform: translateX(-390%);
+    letter-spacing: 596px;
+  }
+  23% {
+    transform: translateX(-385%);
+    letter-spacing: 589px;
+  }
+  24% {
+    transform: translateX(-380%);
+    letter-spacing: 582px;
+  }
+  25% {
+    transform: translateX(-375%);
+    letter-spacing: 575px;
+  }
+  26% {
+    transform: translateX(-370%);
+    letter-spacing: 568px;
+  }
+  27% {
+    transform: translateX(-365%);
+    letter-spacing: 561px;
+  }
+  28% {
+    transform: translateX(-360%);
+    letter-spacing: 554px;
+  }
+  29% {
+    transform: translateX(-355%);
+    letter-spacing: 547px;
+  }
+  30% {
+    transform: translateX(-350%);
+    letter-spacing: 540px;
+  }
+  31% {
+    transform: translateX(-345%);
+    letter-spacing: 533px;
+  }
+  32% {
+    transform: translateX(-340%);
+    letter-spacing: 526px;
+  }
+  33% {
+    transform: translateX(-335%);
+    letter-spacing: 519px;
+  }
+  34% {
+    transform: translateX(-330%);
+    letter-spacing: 512px;
+  }
+  35% {
+    transform: translateX(-325%);
+    letter-spacing: 505px;
+  }
+  36% {
+    transform: translateX(-320%);
+    letter-spacing: 498px;
+  }
+  37% {
+    transform: translateX(-315%);
+    letter-spacing: 491px;
+  }
+  38% {
+    transform: translateX(-310%);
+    letter-spacing: 484px;
+  }
+  39% {
+    transform: translateX(-305%);
+    letter-spacing: 477px;
+  }
+  40% {
+    transform: translateX(-300%);
+    letter-spacing: 470px;
+  }
+  41% {
+    transform: translateX(-295%);
+    letter-spacing: 463px;
+  }
+  42% {
+    transform: translateX(-290%);
+    letter-spacing: 456px;
+  }
+  43% {
+    transform: translateX(-285%);
+    letter-spacing: 449px;
+  }
+  44% {
+    transform: translateX(-280%);
+    letter-spacing: 442px;
+  }
+  45% {
+    transform: translateX(-275%);
+    letter-spacing: 435px;
+  }
+  46% {
+    transform: translateX(-270%);
+    letter-spacing: 428px;
+  }
+  47% {
+    transform: translateX(-265%);
+    letter-spacing: 421px;
+  }
+  48% {
+    transform: translateX(-260%);
+    letter-spacing: 414px;
+  }
+  49% {
+    transform: translateX(-255%);
+    letter-spacing: 407px;
+  }
+  50% {
+    transform: translateX(-250%);
+    letter-spacing: 400px;
+  }
+  51% {
+    transform: translateX(-245%);
+    letter-spacing: 393px;
+  }
+  52% {
+    transform: translateX(-240%);
+    letter-spacing: 386px;
+  }
+  53% {
+    transform: translateX(-235%);
+    letter-spacing: 379px;
+  }
+  54% {
+    transform: translateX(-230%);
+    letter-spacing: 372px;
+  }
+  55% {
+    transform: translateX(-225%);
+    letter-spacing: 365px;
+  }
+  56% {
+    transform: translateX(-220%);
+    letter-spacing: 358px;
+  }
+  57% {
+    transform: translateX(-215%);
+    letter-spacing: 351px;
+  }
+  58% {
+    transform: translateX(-210%);
+    letter-spacing: 344px;
+  }
+  59% {
+    transform: translateX(-205%);
+    letter-spacing: 337px;
+  }
+  60% {
+    transform: translateX(-200%);
+    letter-spacing: 330px;
+  }
+  61% {
+    transform: translateX(-195%);
+    letter-spacing: 323px;
+  }
+  62% {
+    transform: translateX(-190%);
+    letter-spacing: 316px;
+  }
+  63% {
+    transform: translateX(-185%);
+    letter-spacing: 309px;
+  }
+  64% {
+    transform: translateX(-180%);
+    letter-spacing: 302px;
+  }
+  65% {
+    transform: translateX(-175%);
+    letter-spacing: 295px;
+  }
+  66% {
+    transform: translateX(-170%);
+    letter-spacing: 288px;
+  }
+  67% {
+    transform: translateX(-165%);
+    letter-spacing: 281px;
+  }
+  68% {
+    transform: translateX(-160%);
+    letter-spacing: 274px;
+  }
+  69% {
+    transform: translateX(-155%);
+    letter-spacing: 267px;
+  }
+  70% {
+    transform: translateX(-150%);
+    letter-spacing: 260px;
+  }
+  71% {
+    transform: translateX(-145%);
+    letter-spacing: 253px;
+  }
+  72% {
+    transform: translateX(-140%);
+    letter-spacing: 246px;
+  }
+  73% {
+    transform: translateX(-135%);
+    letter-spacing: 239px;
+  }
+  74% {
+    transform: translateX(-130%);
+    letter-spacing: 232px;
+  }
+  75% {
+    transform: translateX(-125%);
+    letter-spacing: 225px;
+  }
+  76% {
+    transform: translateX(-120%);
+    letter-spacing: 218px;
+  }
+  77% {
+    transform: translateX(-115%);
+    letter-spacing: 211px;
+  }
+  78% {
+    transform: translateX(-110%);
+    letter-spacing: 204px;
+  }
+  79% {
+    transform: translateX(-105%);
+    letter-spacing: 197px;
+  }
+  80% {
+    transform: translateX(-100%);
+    letter-spacing: 190px;
+  }
+  81% {
+    transform: translateX(-95%);
+    letter-spacing: 183px;
+  }
+  82% {
+    transform: translateX(-90%);
+    letter-spacing: 176px;
+  }
+  83% {
+    transform: translateX(-85%);
+    letter-spacing: 169px;
+  }
+  84% {
+    transform: translateX(-80%);
+    letter-spacing: 162px;
+  }
+  85% {
+    transform: translateX(-75%);
+    letter-spacing: 155px;
+  }
+  86% {
+    transform: translateX(-70%);
+    letter-spacing: 148px;
+  }
+  87% {
+    transform: translateX(-65%);
+    letter-spacing: 141px;
+  }
+  88% {
+    transform: translateX(-60%);
+    letter-spacing: 134px;
+  }
+  89% {
+    transform: translateX(-55%);
+    letter-spacing: 127px;
+  }
+  90% {
+    transform: translateX(-50%);
+    letter-spacing: 120px;
+  }
+  91% {
+    transform: translateX(-45%);
+    letter-spacing: 113px;
+  }
+  92% {
+    transform: translateX(-40%);
+    letter-spacing: 106px;
+  }
+  93% {
+    transform: translateX(-35%);
+    letter-spacing: 99px;
+  }
+  94% {
+    transform: translateX(-30%);
+    letter-spacing: 92px;
+  }
+  95% {
+    transform: translateX(-25%);
+    letter-spacing: 85px;
+  }
+  96% {
+    transform: translateX(-20%);
+    letter-spacing: 78px;
+  }
+  97% {
+    transform: translateX(-15%);
+    letter-spacing: 71px;
+  }
+  98% {
+    transform: translateX(-10%);
+    letter-spacing: 64px;
+  }
+  99% {
+    transform: translateX(-5%);
+    letter-spacing: 57px;
+  }
+  100% {
+    transform: translateX(0%);
+    letter-spacing: 50px;
+  }
+}
+::selection {
+  color: crimson;
+}
+
+/*# sourceMappingURL=style.css.map */

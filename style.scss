@@ -1,0 +1,84 @@
+*{
+   font-family:   "Big Shoulders Stencil Text";
+}
+body {
+    background-color: #292424;
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+main {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 90vh;
+    flex-direction: column;
+}
+
+.title-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.title {
+    font-size: 9.5rem;
+    letter-spacing: 1.5rem;
+    color: white;
+   // animation: 2s orinoco ease;
+}
+.button-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+a {
+    font-size: 3.5rem;
+    letter-spacing: .6rem;
+    text-decoration: none;
+    color: chartreuse
+}
+
+.orinoco{
+    span{
+        animation: 2s orinoco ease;
+        display: inline-block;
+        color: chartreuse;
+        transition: 2s;
+        &:hover{
+            transform: rotate(180deg);
+            font-style: italic;
+        }
+    }
+}
+.e-shop{
+    margin-top: 2rem;
+    display: block;
+    font-size: 6rem;
+    text-align: center;
+    .s{
+        animation: 2s orinoco ease;
+        display: inline-block;
+        color: chartreuse;
+        transition: 2s;
+        &:hover{
+            transform: rotate(180deg);
+            font-style: italic;
+        }
+    }
+}
+
+@keyframes orinoco {
+    @for $i from 1 through 100 {
+        #{$i * 1%} {
+          transform: translateX(#{-500% + $i *5});
+          letter-spacing: #{750px - $i * 7}
+        }
+      }
+}
+
+
+::selection {
+    color: crimson;
+}

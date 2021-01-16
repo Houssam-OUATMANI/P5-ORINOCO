@@ -1,0 +1,14 @@
+@import '../../utils/mixins.scss';
+.header {
+    @include flexBox;
+    justify-content: space-between;
+    width: auto;
+    background-color: black ;
+    border-bottom: 5px solid #747171;
+    h1{
+        margin-left: 2rem;
+    }
+    nav {
+        margin-right: 2rem;
+    }
+}

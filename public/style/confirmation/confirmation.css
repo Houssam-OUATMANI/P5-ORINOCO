@@ -1,0 +1,88 @@
+* {
+  color: white;
+}
+
+button, option, select {
+  color: black !important;
+  font-size: 1.2rem;
+  cursor: pointer;
+  font-family: "Big Shoulders Stencil Text" !important;
+}
+
+/********/
+html, body {
+  scroll-behavior: smooth;
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+a {
+  text-decoration: none;
+  color: white;
+}
+
+ul {
+  list-style: none;
+}
+
+img {
+  object-fit: cover;
+  width: 480px;
+  height: 270px;
+}
+
+.main {
+  margin: 0 1rem;
+}
+
+* {
+  font-family: "Big Shoulders Stencil Text", "Roboto", sans-serif;
+}
+
+body {
+  background-color: #292424;
+}
+
+.main {
+  text-align: center;
+}
+
+.confirm {
+  color: chartreuse;
+}
+
+.order__article {
+  margin: auto;
+  border-bottom: 3px solid chartreuse;
+  width: 40%;
+}
+.order__article h3 {
+  font-size: 1.5rem;
+}
+.order__article .id {
+  font-size: 1.3rem;
+}
+.order__article .price {
+  font-size: 1.3rem;
+}
+.order__article .price span {
+  color: chartreuse;
+}
+
+.footer {
+  margin-top: 6rem;
+  border-top: 5px solid chartreuse;
+  border-bottom: 5px solid chartreuse;
+  height: 350px;
+  display: flex;
+  justify-content: center;
+}
+.footer section {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+/*# sourceMappingURL=confirmation.css.map */
