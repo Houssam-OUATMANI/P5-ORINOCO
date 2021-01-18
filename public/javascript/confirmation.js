@@ -3,8 +3,10 @@ console.log(order.products.length)
 const {products} = order
 const title = order.products.length == 1 ? 'VOTRE COMMANDE' : 'VOS COMMANDES'
 const rendeOrder = document.querySelector('.render__order')
+const orderId = document.querySelector(".order-id")
 
 
+orderId.innerHTML= `NUMERO DE COMMANDE : ${order.orderId}`
 products.forEach(arg => {
     rendeOrder.innerHTML += `
         <article class="order__article">

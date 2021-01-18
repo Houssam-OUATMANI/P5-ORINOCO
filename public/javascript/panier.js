@@ -10,6 +10,11 @@ function setTotalItem(){
     return totalItem
 }
 
+function getCountItemCart(){
+    let countItemCart = JSON.parse(localStorage.getItem('countItemCart'))
+    return countItemCart
+}
+
 function setTotalPrice(){
     let totalPrice = localStorage.getItem('totalPrice')
     return totalPrice
@@ -24,8 +29,7 @@ function displayCart(paniers){
     paniers.map(arg => {
         panierHolder.innerHTML += `
         <article class="cart__article">
-        <h3>${arg.name}</h3>
-        <p>$ ${arg.price /100 * 5}</p>
+       
             <div class="flexbox">
                 <div class="flexbox__image">
                 <a href="./appareil.html?id=${arg._id}">
@@ -33,15 +37,20 @@ function displayCart(paniers){
                 </a>
                 </div>
                 <div>
-                    <span class="minus">&larr;</span>
-                    <strong class="cart-counter">0</strong>
-                    <span class="plus">&rarr;</span>
+                    <h3> ${arg.name}</h3>
+                    <p>PRIX : $ ${arg.price /100 * getCountItemCart()}</p>
+                    <p></p>
+                </div>
+                <div>
+                    <i class="fas fa-arrow-circle-left minus"></i>
+                    <strong class="cart-counter"> 0 </strong>
+                    <i class="fas fa-arrow-circle-right plus"></i>
                 </div>
             </div>
         </article>
         `
         totalPriceHTML.innerHTML = `
-        <p>Prix :  ${setTotalPrice()} Euros</p>
+        <p class="total-price">Prix :  ${setTotalPrice()} Euros</p>
         `
     })
 }
@@ -50,13 +59,14 @@ function addOne(){
     const cartCounter =[... document.querySelectorAll(".cart-counter")]
     const cartPlus = [...document.querySelectorAll(".plus")]
     
-    cartPlus.map(arg => {
+    cartPlus.forEach(arg => {
         arg.addEventListener('click', ()=> {
             cartCounter.map(arg => {
                 if(arg.innerText === '9'){
                     arg.disabled = true
                 }else{
-                    arg.innerHTML = +arg.innerText +1 
+                    arg.innerHTML = +arg.innerText +1
+                    localStorage.setItem('countItemCart', JSON.stringify(+arg.innerText) )
                 }
             })
         })
