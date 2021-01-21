@@ -115,4 +115,14 @@ body {
   flex-direction: column;
 }
 
+@media screen and (max-width: 800px) {
+  .card {
+    margin: 1rem 0;
+    width: 20rem;
+  }
+  .card img {
+    width: 20rem;
+  }
+}
+
 /*# sourceMappingURL=index.css.map */

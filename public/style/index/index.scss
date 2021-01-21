@@ -75,3 +75,18 @@ body {
      flex-direction: column;
  }
 }
+
+
+
+// Media queries
+
+@media screen and (max-width: 800px){
+  .card {
+    margin: 1rem 0;
+    width: 20rem;
+    
+    img{
+      width: 20rem;
+    }
+  }
+}

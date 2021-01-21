@@ -38,7 +38,7 @@
     border-left: 5px solid chartreuse; 
 }
 .flexbox__image{
-    width: 100px;
+    width: 150px;
     a{
         img {
             width: 150px;
@@ -47,6 +47,12 @@
         }
     }
 }
+
+.price__holder {
+    text-align: center;
+    font-size: 1.5rem;
+}
+
 .formulaire{
     width: 50%;
     margin: auto;
@@ -87,17 +93,35 @@ input:hover,input:focus{
     width: 50%;
     margin: auto;
     cursor: pointer;
+    border-radius: 5px;
+    background-color: chartreuse;
+    border: none;
 }
 ::placeholder {
     padding: 0 2rem;
 }
 
 
-@keyframes wow {
-    0% {
-
+@media screen and (max-width: 1000px){
+    .cart__article{
+        width: 100%;
     }
-    100%{
-     
+
+    .card__detail{
+            width: 6rem;
+
+
+        p, h3{
+            margin: 0;
+            font-size: 0.8rem;
+        }
+    }
+.price__holder {
+    text-align: center;
+    font-size: 1.2rem;
+}
+    .formulaire {
+        margin: auto;
+        width: 95%;
     }
 }

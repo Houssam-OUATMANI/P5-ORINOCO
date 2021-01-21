@@ -82,3 +82,33 @@ a {
 ::selection {
     color: crimson;
 }
+
+
+// Media queries
+
+@media screen and (max-width: 800px){
+    .title {
+        font-size: 2.4rem;
+        span{
+            animation: orinoco 1.2s ease-in-out;
+        }
+    }
+    .e-shop{
+        font-size: 2rem;
+        .s{
+            animation: orinoco 1s ease-in-out;
+        }
+    }
+    a {
+        font-size: 1.0rem;
+    }
+
+    @keyframes orinoco {
+        @for $i from 1 through 100 {
+            #{$i * 1%} {
+              transform: translateX(#{-150% + $i *2});
+              letter-spacing: #{100px - $i * 2}
+            }
+          }
+    }
+}

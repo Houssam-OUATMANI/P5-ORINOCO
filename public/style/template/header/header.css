@@ -40,7 +40,7 @@ img {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width: auto;
+  width: 100%;
   background-color: black;
   border-bottom: 5px solid #747171;
 }
@@ -49,6 +49,17 @@ img {
 }
 .header nav {
   margin-right: 2rem;
+}
+
+@media screen and (max-width: 800px) {
+  .header {
+    margin: auto;
+  }
+
+  h1 {
+    font-size: 1.5rem;
+    margin-top: 1.5rem;
+  }
 }
 
 /*# sourceMappingURL=header.css.map */

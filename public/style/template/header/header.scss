@@ -2,7 +2,7 @@
 .header {
     @include flexBox;
     justify-content: space-between;
-    width: auto;
+    width: 100%;
     background-color: black ;
     border-bottom: 5px solid #747171;
     h1{
@@ -10,5 +10,17 @@
     }
     nav {
         margin-right: 2rem;
+    }
+}
+
+// Media queries
+
+@media screen and (max-width: 800px){
+    .header {
+        margin: auto;
+    }
+    h1 {
+        font-size: 1.5rem;
+        margin-top: 1.5rem;
     }
 }

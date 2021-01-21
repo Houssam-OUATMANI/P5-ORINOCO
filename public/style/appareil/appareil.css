@@ -95,4 +95,19 @@ body {
   flex-direction: column;
 }
 
+@media screen and (max-width: 800px) {
+  .main h2 {
+    font-size: 2rem;
+  }
+
+  .card {
+    margin: auto;
+    width: 20rem;
+  }
+
+  .card__img img {
+    width: 20rem;
+  }
+}
+
 /*# sourceMappingURL=appareil.css.map */

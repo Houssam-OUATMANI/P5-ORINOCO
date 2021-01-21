@@ -1,8 +1,14 @@
+// variables globales
 const counter = document.querySelector('.counter')
 const panierHolder = document.querySelector('.panier-item__holder')
 const totalPriceHTML = document.querySelector(".price__holder")
 
+// end variables globales
 
+/**
+ * 
+ *  Fonctions Utilitaires localStorage
+ */
 
 function setTotalItem(){
     let totalItem = localStorage.getItem('totalItem')
@@ -25,6 +31,19 @@ async function getAllcart(){
     return paniers
 }
 
+function clearLocalSorage() {
+    localStorage.removeItem('paniers')
+     localStorage.removeItem('totalItem')
+     localStorage.removeItem('totalPrice')
+     localStorage.removeItem('cameras')
+}
+
+
+
+// END fonctions utilitaires
+
+
+// injection HTML
 function displayCart(paniers){
     paniers.map(arg => {
         panierHolder.innerHTML += `
@@ -36,7 +55,7 @@ function displayCart(paniers){
                     <img src=${arg.imageUrl} alt=${arg.description}>
                 </a>
                 </div>
-                <div>
+                <div class="card__detail">
                     <h3> ${arg.name}</h3>
                     <p>PRIX : $ ${arg.price /100 * getCountItemCart()}</p>
                     <p></p>
@@ -54,7 +73,11 @@ function displayCart(paniers){
         `
     })
 }
+// end Injection HTML
 
+
+
+// augmenter la quantité
 function addOne(){
     const cartCounter =[... document.querySelectorAll(".cart-counter")]
     const cartPlus = [...document.querySelectorAll(".plus")]
@@ -73,7 +96,9 @@ function addOne(){
     })
 }
 
+// end augmenter la quantité
 
+// diminuer la quantité
 function minusOne(){
     const cartCounter =[... document.querySelectorAll(".cart-counter")]
     const cartMinus = [...document.querySelectorAll(".minus")]
@@ -91,28 +116,33 @@ function minusOne(){
     })
 }
 
-
-function clearLocalSorage() {
-    localStorage.removeItem('paniers')
-     localStorage.removeItem('totalItem')
-     localStorage.removeItem('totalPrice')
-     localStorage.removeItem('cameras')
-}
+// end // diminuer la quantité
 
 
 /***
- * 
- *  FORMULAAIRE
- */
-
+ *
+ *  FORMULAIRE
+ *  
+ ***/
 
 const form = document.getElementById('form')
 async function handleSubmit(){
+    
+    // variables locales form
     const firstName = document.getElementById('firstName').value
     const lastName = document.getElementById('lastName').value
     const address = document.getElementById('address').value
     const city = document.getElementById('city').value
-    const email = document.getElementById('firstName').value
+    const email = document.getElementById('email').value
+    //end variables locales form
+
+
+    // VALIDATION EMAIL
+    const regex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/
+    const result = regex.test(email)
+    if (!result) return alert('EMAIL NON VALIDE')
+    // end VALIDATION EMAIL
+
     const panier  = JSON.parse(localStorage.getItem('paniers'))
 
     const data = {
@@ -120,6 +150,7 @@ async function handleSubmit(){
         products : panier 
     }
 
+    // post 
      const url = "http://127.0.0.1:3000/api/cameras/order"
      const response = await fetch(url, {
          method : 'POST',
@@ -129,12 +160,19 @@ async function handleSubmit(){
          body : JSON.stringify(data)
      })
      const order  =await response.json()
+     // end POST
+
+     // stockage order pour l'afficher dans la page confirmation
      localStorage.setItem('order' , JSON.stringify(order))
-     clearLocalSorage()
+     //
+      clearLocalSorage()
+
+    // redirection vers la page confirmation 
      window.location.href = "../../views/confirmation.html"
  }
 
 
+ 
 document.addEventListener('DOMContentLoaded', ()=>{
     getAllcart().then(paniers => {
         displayCart(paniers)
@@ -147,4 +185,5 @@ document.addEventListener('DOMContentLoaded', ()=>{
 form.addEventListener('submit', (e)=>{
     e.preventDefault()
     handleSubmit()
+    //formValidation()
 })
