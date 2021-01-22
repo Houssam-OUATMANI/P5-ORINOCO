@@ -47,7 +47,7 @@ function clearLocalSorage() {
 
 // injection HTML
 function displayCart(paniers){
-    if(paniers !== null){
+    if(paniers !== null ){
         console.log(paniers.length)
         paniers.map(arg => {
             panierHolder.innerHTML += `
@@ -69,7 +69,7 @@ function displayCart(paniers){
                         <strong class="cart-counter"> 1 </strong>
                         <i class="fas fa-arrow-circle-right plus"></i>
                     </div>
-                    <span class="trash__holder" title="Supprimer l'article">
+                    <span class="trash__holder" title="Supprimer l'article" data-id="${arg._id}">
                         <i class="fas fa-trash-alt"></i>
                     </span>
 
@@ -81,6 +81,10 @@ function displayCart(paniers){
             <p class="total-price">Prix :  ${setTotalPrice()} Euros</p>
             `
         })
+    }
+    if (paniers.length <= 0) {
+        panierHolder.innerHTML = "<h2 style='text-align:center;'>VOtre panier est vide !</h2>"
+        deleteHolder.innerHTML = ""
     }
 }
 // end Injection HTML
@@ -130,27 +134,44 @@ function minusOne(){
 
 
 // delete one article
-function deleteOne(id){
-
+function deleteOne(){
+    let getPanier = JSON.parse(localStorage.getItem('paniers'))
+    let getTotalItems = JSON.parse(localStorage.getItem('totalItem'))
+    console.log(getPanier)
+    const deleteIcons = [...document.querySelectorAll('.trash__holder')]
+    deleteIcons.map(arg =>{
+        arg.addEventListener('click', ()=> {
+            getPanier = getPanier.filter(article =>article._id !== arg.dataset.id )
+            localStorage.setItem('paniers', JSON.stringify(getPanier))
+            getTotalItems = getPanier.length
+            localStorage.setItem('totalItem', JSON.stringify(getTotalItems))
+            counter.innerHTML = getTotalItems
+            getAllcart().then(paniers => {
+                displayCart(paniers)
+            })
+        })
+    })
 }
 
 // delete all articles
 
-function deleteAll(panier){
+function deleteAll(){
     const deleteAllBtn = document.querySelector('.delete-all-btn')
-    deleteAllBtn.addEventListener('click', ()=> {
-        const conf = confirm('Etes-vous sur de vouloir effacer tout le panier')
-        if (conf){
-           clearLocalSorage()
-           panierHolder.innerHTML = "<h2style='text-align = 'center''>VOTRE PANIER EST VIDE ! </h2>"
-           totalPriceHTML.innerHTML = 'Redirection dans ...'
-           deleteHolder.style.display = "none"
-           function redirect(){
-               return window.location.href ="../../views/produits.html"
-           }
-           setTimeout(redirect , 1500)
-        }
-    })
+    if(deleteAllBtn !== null){
+        deleteAllBtn.addEventListener('click', ()=> {
+            const conf = confirm('Etes-vous sur de vouloir effacer tout le panier')
+            if (conf){
+               clearLocalSorage()
+               panierHolder.innerHTML = "<h2style='text-align = 'center''>VOTRE PANIER EST VIDE ! </h2>"
+               totalPriceHTML.innerHTML = 'Redirection dans ...'
+               deleteHolder.style.display = "none"
+               function redirect(){
+                   return window.location.href ="../../views/produits.html"
+               }
+               setTimeout(redirect , 1500)
+            }
+        })
+    }
 }
 
 /***
@@ -237,6 +258,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
         addOne()
         minusOne()
         deleteAll(paniers)
+        deleteOne()
     })
     setTotalItem()
     
