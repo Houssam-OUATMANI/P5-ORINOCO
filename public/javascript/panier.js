@@ -2,6 +2,8 @@
 const counter = document.querySelector('.counter')
 const panierHolder = document.querySelector('.panier-item__holder')
 const totalPriceHTML = document.querySelector(".price__holder")
+const btnSubmit = document.querySelector('.btn-submit')
+const deleteHolder = document.querySelector('.delete__holder')
 
 // end variables globales
 
@@ -32,7 +34,7 @@ async function getAllcart(){
 }
 
 function clearLocalSorage() {
-    localStorage.removeItem('paniers')
+     localStorage.removeItem('paniers')
      localStorage.removeItem('totalItem')
      localStorage.removeItem('totalPrice')
      localStorage.removeItem('cameras')
@@ -45,33 +47,41 @@ function clearLocalSorage() {
 
 // injection HTML
 function displayCart(paniers){
-    paniers.map(arg => {
-        panierHolder.innerHTML += `
-        <article class="cart__article">
-       
-            <div class="flexbox">
-                <div class="flexbox__image">
-                <a href="./appareil.html?id=${arg._id}">
-                    <img src=${arg.imageUrl} alt=${arg.description}>
-                </a>
+    if(paniers !== null){
+        console.log(paniers.length)
+        paniers.map(arg => {
+            panierHolder.innerHTML += `
+            <article class="cart__article">
+                <div class="flexbox">
+                    <div class="flexbox__image">
+                    <a href="./appareil.html?id=${arg._id}">
+                        <img src=${arg.imageUrl} alt=${arg.description}>
+                    </a>
+                    </div>
+
+                    <div class="card__detail">
+                        <h3> ${arg.name}</h3>
+                        <p>PRIX : $ ${arg.price /100 * getCountItemCart()}</p>
+                        <p></p>
+                    </div>
+                    <div>
+                        <i class="fas fa-arrow-circle-left minus"></i>
+                        <strong class="cart-counter"> 1 </strong>
+                        <i class="fas fa-arrow-circle-right plus"></i>
+                    </div>
+                    <span class="trash__holder" title="Supprimer l'article">
+                        <i class="fas fa-trash-alt"></i>
+                    </span>
+
                 </div>
-                <div class="card__detail">
-                    <h3> ${arg.name}</h3>
-                    <p>PRIX : $ ${arg.price /100 * getCountItemCart()}</p>
-                    <p></p>
-                </div>
-                <div>
-                    <i class="fas fa-arrow-circle-left minus"></i>
-                    <strong class="cart-counter"> 0 </strong>
-                    <i class="fas fa-arrow-circle-right plus"></i>
-                </div>
-            </div>
-        </article>
-        `
-        totalPriceHTML.innerHTML = `
-        <p class="total-price">Prix :  ${setTotalPrice()} Euros</p>
-        `
-    })
+            </article>
+            `
+            deleteHolder.innerHTML = `<button class="delete-all-btn">Effacer le panier</button>`
+            totalPriceHTML.innerHTML = `
+            <p class="total-price">Prix :  ${setTotalPrice()} Euros</p>
+            `
+        })
+    }
 }
 // end Injection HTML
 
@@ -106,7 +116,7 @@ function minusOne(){
     cartMinus.map(arg => {
         arg.addEventListener('click', ()=> {
             cartCounter.map(arg => {
-                if(arg.innerText === '0'){
+                if(arg.innerText === '1'){
                     arg.disabled = true
                 }else{
                     arg.innerHTML = +arg.innerText -1 
@@ -119,6 +129,30 @@ function minusOne(){
 // end // diminuer la quantité
 
 
+// delete one article
+function deleteOne(id){
+
+}
+
+// delete all articles
+
+function deleteAll(panier){
+    const deleteAllBtn = document.querySelector('.delete-all-btn')
+    deleteAllBtn.addEventListener('click', ()=> {
+        const conf = confirm('Etes-vous sur de vouloir effacer tout le panier')
+        if (conf){
+           clearLocalSorage()
+           panierHolder.innerHTML = "<h2style='text-align = 'center''>VOTRE PANIER EST VIDE ! </h2>"
+           totalPriceHTML.innerHTML = 'Redirection dans ...'
+           deleteHolder.style.display = "none"
+           function redirect(){
+               return window.location.href ="../../views/produits.html"
+           }
+           setTimeout(redirect , 1500)
+        }
+    })
+}
+
 /***
  *
  *  FORMULAIRE
@@ -126,27 +160,55 @@ function minusOne(){
  ***/
 
 const form = document.getElementById('form')
+
 async function handleSubmit(){
     
     // variables locales form
-    const firstName = document.getElementById('firstName').value
-    const lastName = document.getElementById('lastName').value
-    const address = document.getElementById('address').value
-    const city = document.getElementById('city').value
-    const email = document.getElementById('email').value
+    const firstName = document.getElementById('firstName')
+    const lastName = document.getElementById('lastName')
+    const address = document.getElementById('address')
+    const city = document.getElementById('city')
+    const email = document.getElementById('email')
     //end variables locales form
 
 
     // VALIDATION EMAIL
-    const regex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/
-    const result = regex.test(email)
-    if (!result) return alert('EMAIL NON VALIDE')
+    const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/
+    const alplhaNumeric = /^[a-zA-Z0-9_]*$/
+
+    const resultEmail = emailRegex.test(email.value)
+    const resultFirstName = alplhaNumeric.test(firstName.value)
+    const resultLastName  =alplhaNumeric.test(lastName.value)
+    const resultAddress  =alplhaNumeric.test(address.value)
+    const resultCity  =alplhaNumeric.test(city.value)
+
+    if (!resultFirstName){
+        return alert(" Prénom non valide !")
+    }else if (!resultLastName){
+        return alert(" Nom de famille non valide ! ")
+    }
+    else if (!resultAddress){
+        return alert(" Adresse non valide ! ")
+    }
+    else if (!resultCity){
+        return alert(" Ville non valide ! ")
+    }
+    else if (!resultEmail) {
+        return alert("Email non Valide !")
+    }
     // end VALIDATION EMAIL
+
 
     const panier  = JSON.parse(localStorage.getItem('paniers'))
 
     const data = {
-        contact : {firstName, lastName, address, city, email},
+        contact : {
+                firstName : firstName.value,
+                lastName : lastName.value,
+                address : address.value,
+                city : city.value,
+                email : email.value
+            },
         products : panier 
     }
 
@@ -164,20 +226,17 @@ async function handleSubmit(){
 
      // stockage order pour l'afficher dans la page confirmation
      localStorage.setItem('order' , JSON.stringify(order))
-     //
       clearLocalSorage()
-
     // redirection vers la page confirmation 
      window.location.href = "../../views/confirmation.html"
  }
 
-
- 
 document.addEventListener('DOMContentLoaded', ()=>{
     getAllcart().then(paniers => {
         displayCart(paniers)
         addOne()
         minusOne()
+        deleteAll(paniers)
     })
     setTotalItem()
     
@@ -185,5 +244,4 @@ document.addEventListener('DOMContentLoaded', ()=>{
 form.addEventListener('submit', (e)=>{
     e.preventDefault()
     handleSubmit()
-    //formValidation()
 })

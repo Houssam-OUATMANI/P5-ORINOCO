@@ -3,6 +3,12 @@ const counter = document.querySelector('.counter')
 let panier = []
 
 
+/**
+ * 
+ * @returns Objet JS
+ */
+
+// Fonction Appel API
 async function fetchData(){
     try{
         const url = "http://localhost:3000/api/cameras"
@@ -15,7 +21,16 @@ async function fetchData(){
         throw new Error(`Well something wrong happend\n ${err}`)
     }
 }
-const  display = (cameras) =>{
+
+// End Fonction Appel API
+
+
+// fonction affiche html
+/**
+ * 
+ * @param {Object} cameras
+ */
+function display (cameras){
     cameras.map(arg => {
         cardHolder.innerHTML += `
         <article class="card">
@@ -34,35 +49,44 @@ const  display = (cameras) =>{
         `
     })
 }
+// end fonction affiche html
+
+
 
 // Ajouter au panier buttons
 function getButtons(){
     const addButtons = [...document.querySelectorAll('.panier-btn')]
         addButtons.map(addButton => {
             const _id = addButton.dataset.id
+
             const getPaniers = JSON.parse(localStorage.getItem('paniers'))
             const clickedOne = getPaniers.find(arg => arg._id === _id) 
+
             if(clickedOne){
                 addButton.innerHTML = "Ajouté au panier !"
                 addButton.disabled = true
                 addButton.classList.add('disabled')
+
             }else{
                 addButton.addEventListener('click', ()=>{ 
                     addButton.innerHTML = "Ajouté au panier" 
                     addButton.disabled = true
                     addButton.classList.add('disabled')
-                   // Strorage.setIsDisabled(true ,_id)
-                    const targetItem = {...Strorage.getproducts(_id), count : 1 , added :true}
-                    console.log(targetItem)
+
+                    const targetItem = {...Storage.getproducts(_id), count : 1 , added :true}
                     panier = [...JSON.parse(localStorage.getItem('paniers')), targetItem]
-                    Strorage.saveCart(panier)
+
+                    Storage.saveCart(panier)
                     setItemValues(panier)
                 })
             }
-            console.log(_id)
         })
    }
 
+/**
+ * 
+ * @param {Object} panier localStorage "paniers" 
+ */
 function setItemValues(panier){
     let totalPrice = 0
     let totalItem = 0
@@ -71,27 +95,25 @@ function setItemValues(panier){
         totalItem += arg.count
     })
     counter.innerHTML = totalItem
-    Strorage.storeTotalItem(totalItem)
-    Strorage.storeTotalPrice(totalPrice)
+    Storage.storeTotalItem(totalItem)
+    Storage.storeTotalPrice(totalPrice)
 
 } 
 function setTotalItems(){
-    counter.innerHTML = Strorage.getTotalPrice()
+    counter.innerHTML = Storage.getTotalPrice()
 }
 
-// Storage
-class Strorage{
+// Methodes Utilitaires
+class Storage{
     static saveProducts(arg){
-        const cameras = JSON.stringify(arg)
-        localStorage.setItem('cameras', cameras)
+        localStorage.setItem('cameras',  JSON.stringify(arg))
     }
     static getproducts(id){
         const products = JSON.parse(localStorage.getItem('cameras'))
         return products.find(arg => arg._id === id)
     }
     static saveCart(cart){
-        const panier = JSON.stringify(cart)
-        localStorage.setItem('paniers', panier)
+        localStorage.setItem('paniers', JSON.stringify(cart))
     }
 
     static storeTotalItem(totalItem){
@@ -109,26 +131,14 @@ class Strorage{
            return 0
        }
     }
-    static setIsDisabled(bool ,id){
-        let disabledButton = [bool , id]
-        localStorage.setItem('isDisabled', JSON.stringify(disabledButton))
-    }
-
-    static getIsDisabled(){
-        if(localStorage.getItem('isDisabled') === 'true'){
-            return true
-        }else{
-            return false
-        }
-    }
-
 }
+// END methodes utilitaires
 
 document.addEventListener('DOMContentLoaded', ()=> {
     fetchData()
     .then(response => {
         display(response)
-        Strorage.saveProducts(response)
+        Storage.saveProducts(response)
         if(!localStorage.getItem('paniers')){
             localStorage.setItem('paniers',  JSON.stringify(new Array()))
         }

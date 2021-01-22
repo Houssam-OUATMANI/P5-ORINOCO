@@ -7,8 +7,10 @@ const fetchOne = async () => {
     try{
         const data = await fetch(url)
         const response = await data.json()
+
         const{name ,description,imageUrl,price, lenses ,_id} = response
-        cardHolder.innerHTML += `
+
+        cardHolder.innerHTML =`
         <article class="card">
             <div class="card__img">
                 <img src="${imageUrl}" alt="${name}">
@@ -16,11 +18,15 @@ const fetchOne = async () => {
             <div class="card__info">
                  <h3>${name}</h3>
                 <p>Prix <strong>${price / 100}$</strong> </p>
-                <p>Objectifs : ${lenses}</p>
+                
             </div>
             <div>
                 <p>${description}</p>
             <div>
+            <div class="lenses__container">
+                <input type="checkbox" name="${lenses}" value="${lenses}"> 
+                <label>${lenses}</label><br>
+            </div>
             <button class= "panier-btn" data-id=${_id}>Ajouter au panier</button>
 
         </article>
@@ -31,11 +37,14 @@ const fetchOne = async () => {
 }
 
 function getButton(){
+
     const panierBtn = document.querySelector('.panier-btn')
     const _id = panierBtn.dataset.id
-    console.log(_id)
+
     const getPaniers = JSON.parse(localStorage.getItem('paniers'))
-    const clickedOne = getPaniers.find(arg => arg._id === _id) 
+
+    const clickedOne = getPaniers.find(arg => arg._id === _id)
+
     if(clickedOne){
         panierBtn.innerHTML = "Ajouté au panier !"
         panierBtn.disabled = true
@@ -44,10 +53,10 @@ function getButton(){
         panierBtn.addEventListener('click', ()=> {
             panierBtn.innerHTML = "Ajouté au panier !"
             panierBtn.disabled = true
-            const targetItem = {...Strorage.getproducts(_id), count : 1 , added :true}
-            console.log(targetItem)
+
+            const targetItem = {...Storage.getproducts(_id), count : 1 , added :true}
             panier = [...JSON.parse(localStorage.getItem('paniers')), targetItem]
-            Strorage.saveCart(panier)
+            Storage.saveCart(panier)
         })
     }
 }
@@ -78,7 +87,6 @@ document.addEventListener("DOMContentLoaded", ()=> {
         setTotalItem()
         getButton()
     })
-    //keepItemNumber()
 })
 
     
