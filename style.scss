@@ -106,8 +106,8 @@ a {
     @keyframes orinoco {
         @for $i from 1 through 100 {
             #{$i * 1%} {
-              transform: translateX(#{-150% + $i *2});
-              letter-spacing: #{100px - $i * 2}
+              transform: translateX(#{-50% + $i *2});
+              letter-spacing: #{100px - $i * 1.5}
             }
           }
     }

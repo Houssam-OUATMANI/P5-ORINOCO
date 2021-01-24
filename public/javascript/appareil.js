@@ -1,6 +1,7 @@
 const cardHolder = document.querySelector('.card__holder')
 const counter = document.querySelector('.counter')
 const outerLoader= document.querySelector('.loader__outer')
+const lensesContainer = document.querySelector('.lenses__container')
 
 outerLoader.style.visibility = "visible"
 
@@ -12,6 +13,10 @@ const fetchOne = async () => {
         const response = await data.json()
 
         const{name ,description,imageUrl,price, lenses ,_id} = response
+
+    
+          
+        
         outerLoader.style.display = "none"
         cardHolder.innerHTML =`
         <article class="card">
@@ -26,14 +31,16 @@ const fetchOne = async () => {
             <div>
                 <p>${description}</p>
             <div>
-            <div class="lenses__container">
-                <input type="checkbox" name="${lenses}" value="${lenses}"> 
-                <label>${lenses}</label><br>
-            </div>
-            <button class= "panier-btn" data-id=${_id}>Ajouter au panier</button>
-
-        </article>
-        `    
+            <button class= "panier-btn" data-id=${_id} data-price =${price /100}>Ajouter au panier</button>
+            
+            </article>
+            `   
+            lenses.forEach(arg =>{
+            lensesContainer.innerHTML +=`
+                <input type="checkbox" name="${arg}" value="${arg}"> 
+                <label>${arg}</label><br>
+                `
+            }) 
     }catch(err){
         throw new Error(`Well something wrong happend\n ${err}`)
     }
@@ -59,14 +66,17 @@ function getButton(){
         panierBtn.addEventListener('click', ()=> {
             panierBtn.innerHTML = "Ajouté au panier !"
             panierBtn.disabled = true
-
+            let price = +panierBtn.dataset.price
+            console.log(price)
             let targetItem = {...Storage.getproducts(_id), count : 1 , added :true}
             panier = [...JSON.parse(localStorage.getItem('paniers')), targetItem]
             Storage.saveCart(panier)
             let totalItem = JSON.parse(localStorage.getItem('totalItem'))
-            console.log(totalItem)
+            let totalPrice = JSON.parse(localStorage.getItem('totalPrice'))
+            totalPrice += price 
             totalItem += 1
             localStorage.setItem('totalItem', JSON.stringify(totalItem))
+            localStorage.setItem('totalPrice', JSON.stringify(totalPrice))
             counter.innerHTML = +counter.innerHTML + 1
         })
     }

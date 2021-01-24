@@ -54,7 +54,6 @@ function clearLocalSorage() {
 // injection HTML
 function displayCart(paniers){
     if(paniers !== null ){
-        console.log(paniers.length)
         outerLoader.style.display = "none"
         paniers.map(arg => {
             panierHolder.innerHTML += `
@@ -93,28 +92,6 @@ function displayCart(paniers){
 
 // end Injection HTML
 
-//update quantity and price
-
-// function updateQtyAndPrice(){
-//     let totalPrice = JSON.parse(localStorage.getItem('totalPrice'))
-//     const quantityArray = [...document.querySelectorAll('.quantity')]
-//     const getPanier = JSON.parse(localStorage.getItem('paniers'))
-
-//     quantityArray.map(one => {
-//         one.addEventListener('change', ({target})=>{
-//              let totalItemPrice = +target.value * (+target.dataset.price / 100)
-//             // console.log(totalItemPrice)
-//             totalPrice = totalItemPrice
-//              //console.log(totalPrice)
-//              localStorage.setItem('totalPrice', JSON.stringify(totalPrice))
-//              totalPriceHTML.innerHTML = `TOTAL : ${totalPrice} EUROS `
-
-//         })
-//     })
-// }
-
-
-
 // delete one article
 function deleteOne(){
     let priceToRemove
@@ -132,7 +109,6 @@ function deleteOne(){
             let totalPrice = JSON.parse(localStorage.getItem('totalPrice'))
             totalPrice -= priceToRemove.price /100 
             localStorage.setItem('totalPrice', JSON.stringify(totalPrice))
-            console.log(totalPrice)
             totalPriceHTML.innerHTML = `<p class="total-price">PRIX : ${totalPrice}</p>`
 
              getPanier = getPanier.filter(article =>article._id !== arg.dataset.id )
@@ -183,7 +159,6 @@ function deleteAll(){
 
 const form = document.getElementById('form')
 const getTotalItems = localStorage.getItem('totalItem')
-console.log(getTotalItems)
 if(getTotalItems === 0 || getTotalItems === undefined || getTotalItems === null){
     btnSubmit.disabled = true
     btnSubmit.style.cursor = "not-allowed"
