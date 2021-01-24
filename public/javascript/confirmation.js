@@ -23,17 +23,19 @@ products.forEach(arg => {
         </article>`
 })
 
-
+const {firstName,lastName,address,city,email} = order.contact
 function recapitulatifPDF(){
     const pdfDoc = new jsPDF()
     pdfDoc.text("RECAPITULATIF DACHAT",70, 20 )
     pdfDoc.text(`NUMERO DE COMMANDE : ${order.orderId}`,20, 35 )
     pdfDoc.text("------------------------------------------", 70, 50 )
-    pdfDoc.text(`PRENOM :${order.contact.firstName}`, 20, 95 )
-    pdfDoc.text(`NOM :${order.contact.lastName}`, 20, 105 )
-    pdfDoc.text(`ADRESSE :${order.contact.address}`, 20, 115 )
-    pdfDoc.text(`VILLE :${order.contact.city}`, 20, 125 )
-    pdfDoc.text(`EMAIL :${order.contact.email}`, 20, 135 )
+    pdfDoc.text(`PRENOM : ${firstName.toUpperCase()}`, 20, 95 )
+    pdfDoc.text(`NOM : ${lastName.toUpperCase()}`, 20, 105 )
+    pdfDoc.text(`ADRESSE : ${address}`, 20, 115 )
+    pdfDoc.text(`VILLE : ${city}`, 20, 125 )
+    pdfDoc.text(`EMAIL : ${email}`, 20, 135 )
+    pdfDoc.text("------------------------------------------", 70, 180 )
+    pdfDoc.text(`MERCI D'AVOIR COMMANDER CHEZ ORINOCO ${firstName.toUpperCase()} ${lastName.toUpperCase()}\n`, 10, 280 )
     pdfDoc.save("recapitulatif_achat.pdf")
 }
 recapBtn.addEventListener('click',recapitulatifPDF)
