@@ -17,7 +17,7 @@
 .panier-item__holder{
     padding: 0 1rem;
     h3 , p {
-        margin: 2rem 2rem 0 2rem;
+        margin: 0rem 2rem 0 2rem;
         padding: 0;
         display: inline-block;
     }
@@ -28,7 +28,7 @@
     text-align: center;
     border-bottom: 5px solid chartreuse;
     
-    width: 50%;
+    width: 80%;
 }
 
 .flexbox {
@@ -36,6 +36,45 @@
     align-items: center;
     justify-content: space-between;
     border-left: 5px solid chartreuse; 
+}
+
+.quantity__holder{
+    display: flex;
+    width: 12rem;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.quantity {
+    display: inline;
+    padding:  .3rem 0;
+    margin: 0;
+    width: 80px;
+    border-radius: 3px;
+    text-align: center;
+
+    &:hover {
+        transform: none;
+    }
+
+}
+.card__detail{
+    width: 15rem;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    p,h3{
+        margin: 0;
+        padding: 0;
+        font-size: 18px;
+    }
+}
+.trash__holder {
+    cursor: pointer;
+    i {
+        color: crimson;
+    }
 }
 .flexbox__image{
     width: 150px;
@@ -52,6 +91,25 @@
     text-align: center;
     font-size: 1.5rem;
 }
+
+
+
+.delete__holder {
+    margin-top: 1rem;
+    text-align: center;
+    button{
+        transition: .3s;
+        border: none;
+        border-radius: 2px;
+        padding: .5rem 1rem;
+        outline: none;
+        &:hover{
+             background-color: crimson;
+            
+        }
+    }
+}
+
 
 .formulaire{
     width: 50%;
@@ -102,7 +160,61 @@ input:hover,input:focus{
 }
 
 
-@media screen and (max-width: 1000px){
+.loader__outer{
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100px;
+    height: 100px;
+    border-radius: 25%;
+    border: 3px solid chartreuse;
+    animation: loader-outer 5s infinite;
+    visibility: hidden
+  }
+  .loader__inner{
+    width: 60px;
+    height: 60px;
+    border-radius: 15px;
+    border: 2px solid rgb(255, 0, 221);
+    animation: loader-inner 1.5s infinite;
+    
+  }
+  
+  // Media queries
+  
+  @keyframes loader-outer {
+    0%{
+      border: 3px solid chartreuse;
+    }
+    50%{
+      border: 3px solid purple;
+      transform: scale(0.55);
+    }
+    100%{
+      border: 3px solid chartreuse;
+    }
+  }
+  
+  @keyframes loader-inner {
+    0%{
+      border: 3px solid purple;
+     
+      
+    }
+    50%{
+      border: 3px solid chartreuse;
+      transform: scale(0.55);
+    }
+    100%{
+      border: 3px solid purple;
+    }
+  }
+  
+
+
+
+@media screen and (max-width: 1200px){
     .cart__article{
         width: 100%;
     }

@@ -1,5 +1,6 @@
 const cardHolder = document.querySelector('.card__holder')
 const counter = document.querySelector('.counter')
+const outerLoader= document.querySelector('.loader__outer')
 let panier = []
 
 
@@ -10,6 +11,7 @@ let panier = []
 
 // Fonction Appel API
 async function fetchData(){
+    outerLoader.style.visibility = "visible"
     try{
         const url = "http://localhost:3000/api/cameras"
         const getData = await fetch(url)
@@ -31,6 +33,7 @@ async function fetchData(){
  * @param {Object} cameras
  */
 function display (cameras){
+    outerLoader.style.display = "none"
     cameras.map(arg => {
         cardHolder.innerHTML += `
         <article class="card">
@@ -135,13 +138,13 @@ class Storage{
 // END methodes utilitaires
 
 document.addEventListener('DOMContentLoaded', ()=> {
+    if(!localStorage.getItem('paniers')){
+        localStorage.setItem('paniers',  JSON.stringify([]))
+    }
     fetchData()
     .then(response => {
         display(response)
         Storage.saveProducts(response)
-        if(!localStorage.getItem('paniers')){
-            localStorage.setItem('paniers',  JSON.stringify(new Array()))
-        }
     })
     .then(()=> {
         getButtons()

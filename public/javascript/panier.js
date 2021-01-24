@@ -4,6 +4,10 @@ const panierHolder = document.querySelector('.panier-item__holder')
 const totalPriceHTML = document.querySelector(".price__holder")
 const btnSubmit = document.querySelector('.btn-submit')
 const deleteHolder = document.querySelector('.delete__holder')
+const outerLoader= document.querySelector('.loader__outer')
+
+
+
 
 // end variables globales
 
@@ -11,6 +15,8 @@ const deleteHolder = document.querySelector('.delete__holder')
  * 
  *  Fonctions Utilitaires localStorage
  */
+
+outerLoader.style.visibility = "visible"
 
 function setTotalItem(){
     let totalItem = localStorage.getItem('totalItem')
@@ -49,6 +55,7 @@ function clearLocalSorage() {
 function displayCart(paniers){
     if(paniers !== null ){
         console.log(paniers.length)
+        outerLoader.style.display = "none"
         paniers.map(arg => {
             panierHolder.innerHTML += `
             <article class="cart__article">
@@ -61,13 +68,8 @@ function displayCart(paniers){
 
                     <div class="card__detail">
                         <h3> ${arg.name}</h3>
-                        <p>PRIX : $ ${arg.price /100 * getCountItemCart()}</p>
-                        <p></p>
-                    </div>
-                    <div>
-                        <i class="fas fa-arrow-circle-left minus"></i>
-                        <strong class="cart-counter"> 1 </strong>
-                        <i class="fas fa-arrow-circle-right plus"></i>
+                        <p class="card__detail-price">PRIX : $ ${arg.price /100}</p>
+
                     </div>
                     <span class="trash__holder" title="Supprimer l'article" data-id="${arg._id}">
                         <i class="fas fa-trash-alt"></i>
@@ -87,68 +89,67 @@ function displayCart(paniers){
         deleteHolder.innerHTML = ""
     }
 }
+
+
 // end Injection HTML
 
+//update quantity and price
 
+// function updateQtyAndPrice(){
+//     let totalPrice = JSON.parse(localStorage.getItem('totalPrice'))
+//     const quantityArray = [...document.querySelectorAll('.quantity')]
+//     const getPanier = JSON.parse(localStorage.getItem('paniers'))
 
-// augmenter la quantité
-function addOne(){
-    const cartCounter =[... document.querySelectorAll(".cart-counter")]
-    const cartPlus = [...document.querySelectorAll(".plus")]
-    
-    cartPlus.forEach(arg => {
-        arg.addEventListener('click', ()=> {
-            cartCounter.map(arg => {
-                if(arg.innerText === '9'){
-                    arg.disabled = true
-                }else{
-                    arg.innerHTML = +arg.innerText +1
-                    localStorage.setItem('countItemCart', JSON.stringify(+arg.innerText) )
-                }
-            })
-        })
-    })
-}
+//     quantityArray.map(one => {
+//         one.addEventListener('change', ({target})=>{
+//              let totalItemPrice = +target.value * (+target.dataset.price / 100)
+//             // console.log(totalItemPrice)
+//             totalPrice = totalItemPrice
+//              //console.log(totalPrice)
+//              localStorage.setItem('totalPrice', JSON.stringify(totalPrice))
+//              totalPriceHTML.innerHTML = `TOTAL : ${totalPrice} EUROS `
 
-// end augmenter la quantité
+//         })
+//     })
+// }
 
-// diminuer la quantité
-function minusOne(){
-    const cartCounter =[... document.querySelectorAll(".cart-counter")]
-    const cartMinus = [...document.querySelectorAll(".minus")]
-    
-    cartMinus.map(arg => {
-        arg.addEventListener('click', ()=> {
-            cartCounter.map(arg => {
-                if(arg.innerText === '1'){
-                    arg.disabled = true
-                }else{
-                    arg.innerHTML = +arg.innerText -1 
-                }
-            })
-        })
-    })
-}
-
-// end // diminuer la quantité
 
 
 // delete one article
 function deleteOne(){
+    let priceToRemove
     let getPanier = JSON.parse(localStorage.getItem('paniers'))
     let getTotalItems = JSON.parse(localStorage.getItem('totalItem'))
-    console.log(getPanier)
+
     const deleteIcons = [...document.querySelectorAll('.trash__holder')]
+
     deleteIcons.map(arg =>{
-        arg.addEventListener('click', ()=> {
-            getPanier = getPanier.filter(article =>article._id !== arg.dataset.id )
-            localStorage.setItem('paniers', JSON.stringify(getPanier))
-            getTotalItems = getPanier.length
-            localStorage.setItem('totalItem', JSON.stringify(getTotalItems))
-            counter.innerHTML = getTotalItems
-            getAllcart().then(paniers => {
-                displayCart(paniers)
-            })
+        arg.addEventListener('click', ({target})=> {
+            // retirer l'article html
+             target.parentElement.parentElement.parentElement.remove()
+             // soustraire le prix
+            priceToRemove = getPanier.find(article => article._id === arg.dataset.id )
+            let totalPrice = JSON.parse(localStorage.getItem('totalPrice'))
+            totalPrice -= priceToRemove.price /100 
+            localStorage.setItem('totalPrice', JSON.stringify(totalPrice))
+            console.log(totalPrice)
+            totalPriceHTML.innerHTML = `<p class="total-price">PRIX : ${totalPrice}</p>`
+
+             getPanier = getPanier.filter(article =>article._id !== arg.dataset.id )
+             localStorage.setItem('paniers', JSON.stringify(getPanier))
+             getTotalItems = getPanier.length
+             localStorage.setItem('totalItem', JSON.stringify(getTotalItems))
+             counter.innerHTML = getTotalItems
+
+             if (getTotalItems === 0){
+                 deleteHolder.remove()
+                 totalPriceHTML.remove()
+                 panierHolder.innerHTML = "<h2>VOTRE PANIER EST VIDE !</h2>"
+                 panierHolder.style.textAlign = "center" 
+                 btnSubmit.disabled = true
+                 btnSubmit.style.cursor = "not-allowed"
+                 clearLocalSorage()
+             }
         })
     })
 }
@@ -164,7 +165,7 @@ function deleteAll(){
                clearLocalSorage()
                panierHolder.innerHTML = "<h2style='text-align = 'center''>VOTRE PANIER EST VIDE ! </h2>"
                totalPriceHTML.innerHTML = 'Redirection dans ...'
-               deleteHolder.style.display = "none"
+               deleteHolder.remove()
                function redirect(){
                    return window.location.href ="../../views/produits.html"
                }
@@ -181,9 +182,13 @@ function deleteAll(){
  ***/
 
 const form = document.getElementById('form')
-
+const getTotalItems = localStorage.getItem('totalItem')
+console.log(getTotalItems)
+if(getTotalItems === 0 || getTotalItems === undefined || getTotalItems === null){
+    btnSubmit.disabled = true
+    btnSubmit.style.cursor = "not-allowed"
+}
 async function handleSubmit(){
-    
     // variables locales form
     const firstName = document.getElementById('firstName')
     const lastName = document.getElementById('lastName')
@@ -195,7 +200,7 @@ async function handleSubmit(){
 
     // VALIDATION EMAIL
     const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/
-    const alplhaNumeric = /^[a-zA-Z0-9_]*$/
+    const alplhaNumeric = /^[\w_-\s]*$/
 
     const resultEmail = emailRegex.test(email.value)
     const resultFirstName = alplhaNumeric.test(firstName.value)
@@ -221,7 +226,6 @@ async function handleSubmit(){
 
 
     const panier  = JSON.parse(localStorage.getItem('paniers'))
-
     const data = {
         contact : {
                 firstName : firstName.value,
@@ -230,7 +234,7 @@ async function handleSubmit(){
                 city : city.value,
                 email : email.value
             },
-        products : panier 
+        products : panier,
     }
 
     // post 
@@ -255,8 +259,6 @@ async function handleSubmit(){
 document.addEventListener('DOMContentLoaded', ()=>{
     getAllcart().then(paniers => {
         displayCart(paniers)
-        addOne()
-        minusOne()
         deleteAll(paniers)
         deleteOne()
     })

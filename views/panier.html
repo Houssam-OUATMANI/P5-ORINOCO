@@ -23,11 +23,11 @@
     <link rel="stylesheet" href="../public/style/template/header/header.css">
     <link rel="stylesheet" href="../public/style/index/index.css" />
     <link rel="stylesheet" href="../public/style/panier/panier.css">
-    <title>ORONOCA</title>
+    <title>ORINOCO PANIER</title>
   </head>
   <body>
     <header class="header">
-      <h1> <a href="../index.html"> LOGO E-COMMERCE</a></h1>
+      <h1> <a href="../index.html">ORINOCO E-SHOP</a></h1>
       <nav>
         <ul>
           <li><a href="./panier.html">PANIER</a> <span class="counter">0</span></li>
@@ -35,6 +35,9 @@
       </nav>
     </header>
     <main class="main">
+      <div class="loader__outer">
+        <div class="loader__inner"></div>
+    </div>
       <div class="panier-item__holder"></div>
       <div class="delete__holder"></div>
       <div class="price__holder"></div>
@@ -42,7 +45,7 @@
 
 
 <div class="formulaire">
-  <form method="POST"id="form">
+  <form method="POST" id="form">
    <div class="form-group">
      <label for="firstName">PRENOM</label>
      <input class="form-control" type="text" name="firstName" id="firstName" required minlength="3" maxlength="35">
@@ -52,12 +55,12 @@
      <input class="form-control" type="text" name="lastName" id="lastName" required minlength="2" maxlength="35">
    </div>
    <div class="form-group">
-     <label for="adresse">ADRESSE DE LIVRAISON</label>
-     <input class="form-control" type="text" name="address" id="address" required minlength=" 6" maxlength="255">
+     <label for="address">ADRESSE DE LIVRAISON</label>
+     <input class="form-control" type="text" name="address" id="address" required minlength="6" maxlength="255">
    </div>
    <div class="form-group">
      <label for="city">VILLE</label>
-     <input class="form-control" type="text" name="city" id="city" required min="2" maxlength="35">
+     <input class="form-control" type="text" name="city" id="city" required minlength="2" maxlength="35">
    </div>
    <div class="form-group">
      <label for="email">EMAIL</label>

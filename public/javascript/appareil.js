@@ -1,5 +1,8 @@
 const cardHolder = document.querySelector('.card__holder')
 const counter = document.querySelector('.counter')
+const outerLoader= document.querySelector('.loader__outer')
+
+outerLoader.style.visibility = "visible"
 
 const fetchOne = async () => {
     const _id = new URLSearchParams(window.location.search).get('id') 
@@ -9,7 +12,7 @@ const fetchOne = async () => {
         const response = await data.json()
 
         const{name ,description,imageUrl,price, lenses ,_id} = response
-
+        outerLoader.style.display = "none"
         cardHolder.innerHTML =`
         <article class="card">
             <div class="card__img">
@@ -43,7 +46,10 @@ function getButton(){
 
     const getPaniers = JSON.parse(localStorage.getItem('paniers'))
 
-    const clickedOne = getPaniers.find(arg => arg._id === _id)
+    let clickedOne
+    if(getPaniers !== null){
+        clickedOne = getPaniers.find(arg => arg._id === _id)
+    }
 
     if(clickedOne){
         panierBtn.innerHTML = "Ajouté au panier !"
@@ -54,9 +60,14 @@ function getButton(){
             panierBtn.innerHTML = "Ajouté au panier !"
             panierBtn.disabled = true
 
-            const targetItem = {...Storage.getproducts(_id), count : 1 , added :true}
+            let targetItem = {...Storage.getproducts(_id), count : 1 , added :true}
             panier = [...JSON.parse(localStorage.getItem('paniers')), targetItem]
             Storage.saveCart(panier)
+            let totalItem = JSON.parse(localStorage.getItem('totalItem'))
+            console.log(totalItem)
+            totalItem += 1
+            localStorage.setItem('totalItem', JSON.stringify(totalItem))
+            counter.innerHTML = +counter.innerHTML + 1
         })
     }
 }
@@ -64,8 +75,10 @@ function getButton(){
 
 function setTotalItem(){
     let totalItem = localStorage.getItem('totalItem')
-    counter.innerHTML= totalItem
-    return totalItem
+    if (totalItem){
+        counter.innerHTML= totalItem
+    }
+   return totalItem
 }
 
 
@@ -82,6 +95,9 @@ class Storage {
 }
 
 document.addEventListener("DOMContentLoaded", ()=> {
+    if(!localStorage.getItem('paniers')){
+        localStorage.setItem('paniers', JSON.stringify([]))
+    }
     fetchOne()
     .then(()=> {
         setTotalItem()
