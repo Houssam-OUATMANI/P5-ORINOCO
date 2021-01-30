@@ -11,12 +11,8 @@ const fetchOne = async () => {
     try{
         const data = await fetch(url)
         const response = await data.json()
+        const{ name ,description,imageUrl,price, lenses ,_id } = response
 
-        const{name ,description,imageUrl,price, lenses ,_id} = response
-
-    
-          
-        
         outerLoader.style.display = "none"
         cardHolder.innerHTML =`
         <article class="card">
@@ -50,7 +46,6 @@ function getButton(){
 
     const panierBtn = document.querySelector('.panier-btn')
     const _id = panierBtn.dataset.id
-
     const getPaniers = JSON.parse(localStorage.getItem('paniers'))
 
     let clickedOne

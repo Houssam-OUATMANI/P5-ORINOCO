@@ -24,11 +24,6 @@ function setTotalItem(){
     return totalItem
 }
 
-function getCountItemCart(){
-    let countItemCart = JSON.parse(localStorage.getItem('countItemCart'))
-    return countItemCart
-}
-
 function setTotalPrice(){
     let totalPrice = localStorage.getItem('totalPrice')
     return totalPrice
@@ -39,7 +34,7 @@ async function getAllcart(){
     return paniers
 }
 
-function clearLocalSorage() {
+function clearLocalStorage() {
      localStorage.removeItem('paniers')
      localStorage.removeItem('totalItem')
      localStorage.removeItem('totalPrice')
@@ -124,7 +119,7 @@ function deleteOne(){
                  panierHolder.style.textAlign = "center" 
                  btnSubmit.disabled = true
                  btnSubmit.style.cursor = "not-allowed"
-                 clearLocalSorage()
+                 clearLocalStorage()
              }
         })
     })
@@ -138,12 +133,12 @@ function deleteAll(){
         deleteAllBtn.addEventListener('click', ()=> {
             const conf = confirm('Etes-vous sur de vouloir effacer tout le panier')
             if (conf){
-               clearLocalSorage()
-               panierHolder.innerHTML = "<h2style='text-align = 'center''>VOTRE PANIER EST VIDE ! </h2>"
+               clearLocalStorage()
+               panierHolder.innerHTML = "<h2 style='text-align = 'center''>VOTRE PANIER EST VIDE ! </h2>"
                totalPriceHTML.innerHTML = 'Redirection dans ...'
                deleteHolder.remove()
                function redirect(){
-                   return window.location.href ="../../views/produits.html"
+                  return window.location.href ="../../views/produits.html"
                }
                setTimeout(redirect , 1500)
             }
@@ -226,7 +221,7 @@ async function handleSubmit(){
 
      // stockage order pour l'afficher dans la page confirmation
      localStorage.setItem('order' , JSON.stringify(order))
-      clearLocalSorage()
+      clearLocalStorage()
     // redirection vers la page confirmation 
      window.location.href = "../../views/confirmation.html"
  }
