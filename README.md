@@ -6,5 +6,5 @@ le back est dejà fait , le but est  d'implementer la partie client en javascrip
 
 ### TECHNO UTILISÉS :
 
-![HTML5](https://icon-icons.com/icons2/1098/PNG/96/1485481300-38_78657.png)    ![CSS3](https://icon-icons.com/icons2/1098/PNG/96/1485481352-26_78627.png) ![JS](https://icon-icons.com/icons2/1098/PNG/96/1485481257-48_78629.png)
+![HTML5](https://icon-icons.com/icons2/1098/PNG/96/1485481300-38_78657.png)    ![CSS3](https://icon-icons.com/icons2/1098/PNG/96/1485481352-26_78627.png)      ![SASS](https://icon-icons.com/icons2/2415/PNG/96/sass_original_logo_icon_146350.png) ![JS](https://icon-icons.com/icons2/1098/PNG/96/1485481257-48_78629.png)
 
